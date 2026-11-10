@@ -7,6 +7,8 @@ import healthRoutes from "./routes/health.js";
 import chatRoutes from "./routes/chat.js";
 import { errorHandler, notFound } from "./middleware/errorHandler.js";
 import dns from 'node:dns';
+import { initEmbeddings } from "./services/embeddings.js";
+
 dns.setServers(['8.8.8.8', '1.1.1.1']);
 
 const app = express();
@@ -31,11 +33,13 @@ app.use(errorHandler);
 async function start() {
   try {
     await connectDb();
-    app.listen(env.PORT, () => {
+    await initEmbeddings();
+
+    app.listen(env.PORT, "0.0.0.0", () => {
       console.log(`Sentinel gateway listening on port ${env.PORT}`);
     });
   } catch (err) {
-    console.error("Failed to start:", err.message);
+    console.error("Failed to start:", err);
     process.exit(1);
   }
 }
