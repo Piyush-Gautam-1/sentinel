@@ -1,0 +1,23 @@
+{
+  "name": "sentinel-server",
+  "version": "0.1.0",
+  "description": "Sentinel: OpenAI-compatible LLM gateway with security firewall and cost-aware routing",
+  "type": "module",
+  "main": "src/index.js",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "dev": "node --watch src/index.js",
+    "start": "node src/index.js",
+    "create-key": "node scripts/createKey.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "helmet": "^7.1.0",
+    "mongoose": "^8.5.0",
+    "zod": "^3.23.8"
+  }
+}
